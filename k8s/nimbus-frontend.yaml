@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: scart-ng
+    tier: frontend
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: scart-ng
+    tier: frontend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: scart-ng
+    tier: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: scart-ng
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: scart-ng
+        tier: frontend
+    spec:
+      containers:
+      - name: scart-ng
+        image: svaikund/scart-ng:version8
+        ports:
+        - containerPort: 80
