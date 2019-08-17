@@ -18,7 +18,7 @@ COPY . .
 RUN npm run ng build -- --prod --output-path=dist
 
 
-### STAGE 2: Setup ###
+### STAGE 2: Setup test ###
 
 FROM nginx:1.14.1-alpine
 
